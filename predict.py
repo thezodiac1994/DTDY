@@ -22,7 +22,7 @@ def get_ingreds(img_path,url_flag=1):
     if(not url_flag):
         image = CImage(file_obj=open(img_path,'rb'))
     else:
-        image = CImage(url="https://samples.clarifai.com/metro-north.jpg")
+        image = CImage(url=imgpath)
         
     response = model.predict([image])
     parsed_response = json.loads(json.dumps(response))
