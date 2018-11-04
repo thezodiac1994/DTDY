@@ -22,7 +22,7 @@ def get_ingreds(img_path,url_flag=1):
     if(not url_flag):
         image = CImage(file_obj=open(img_path,'rb'))
     else:
-        image = CImage(url="https://samples.clarifai.com/metro-north.jpg")
+        image = CImage(url=img_path)
         
     response = model.predict([image])
     parsed_response = json.loads(json.dumps(response))
@@ -80,7 +80,7 @@ def get_matching_recipes(json_resp, recipes, url_flag = 1):
         
     recipe_score = sorted(recipe_score.items(), key=lambda x: -x[1])
     return recipe_score
-	
+    
 def predict_ids(imgpath, url_flag=1):
     with open('recipes.json', 'r') as F:
         json_recipes = json.load(F)
@@ -92,8 +92,8 @@ def predict_ids(imgpath, url_flag=1):
     #print(recipes)
     matching_ids = get_matching_recipes(get_ingreds(imgpath,url_flag), recipes, url_flag)
     return matching_ids[:5]  # return top 5
-	
-	
+    
+    
 
 
 users = [
@@ -116,19 +116,20 @@ users = [
 
 class User(Resource):
     def get(self, name):
-		print('name is : ', name)
-		#print(request.headers)
-		url = request.headers['Url']
-		print('url is : ', url)
-		print(predict_ids(url, 1))
-		
-		'''
-		from PIL import Image
-		import requests
-		from io import BytesIO
+        print('name is : ', name)
+        #print(request.headers)
+        url = 'https://firebasestorage.googleapis.com/v0/b/ubhacking-221502.appspot.com/o/images%2FfoodImage.jpg?alt=media&token=941439d4-ef87-4d95-9fc9-72ecb118ec86'
+        print('url is : ', url)
+        ids = predict_ids(url, 1)
+        return [i[0] for i in ids]
 
-		response = requests.get(url)
-		img = Image.open(BytesIO(response.content))'''
+        '''
+        from PIL import Image
+        import requests
+        from io import BytesIO
+
+        response = requests.get(url)
+        img = Image.open(BytesIO(response.content))'''
         
 
     def post(self, name):
