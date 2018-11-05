@@ -7,7 +7,7 @@ api = Api(app)
 
 
 from clarifai.rest import ClarifaiApp
-api_key = ClarifaiApp(api_key='97246cf0da164fd9963b504cccaca5ba')
+api_key = ClarifaiApp(api_key='Add your key')
 
 from clarifai.rest import Image as CImage
 import json

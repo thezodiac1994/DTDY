@@ -5,7 +5,7 @@ import gzip
 class DTDYWegmans(object):
 
     def __init__(self):
-        self._headers = {'Subscription-Key': '6aed878acd38406797d3958075511dc2'}
+        self._headers = {'Subscription-Key': '{Add your key}'}
         self._params = urllib.parse.urlencode
         self.conn = http.client.HTTPSConnection('api.wegmans.io')
 
